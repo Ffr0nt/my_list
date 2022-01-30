@@ -1,6 +1,7 @@
 #include <iostream>
 #include <list>
-#include "My_list.hpp"
+#include "My_list.cpp"
+
 
 using namespace std;
 
@@ -17,8 +18,9 @@ int main() {
     cout << "size: " << my_list.size() << endl;
     print_container(my_list);
 
-    /*
+
     my_list.pop_back();
+    /*
     my_list.pop_front();
     my_list.push_front(0);
     my_list.push_back(5);

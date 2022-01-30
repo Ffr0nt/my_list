@@ -87,12 +87,10 @@ template<typename T2>
 My_List<T>::My_List(initializer_list<T2> init_list){
     typedef typename initializer_list<T2>::const_iterator c_iter;
 
-    My_List result;
 
     for (c_iter c_it = std::cbegin(init_list); c_it != std::cend(init_list); ++c_it) {
-        result.push_back (*c_it);
+        (*this).push_back (*c_it);
     }
-    return result;
 }
 
 template<typename T>

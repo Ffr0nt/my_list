@@ -51,6 +51,6 @@ private:
     Element* m_ptr_tail = nullptr;
     size_t m_size=0;
 };
-#include "My_list.сpp"
+
 
     #endif //MY_LIST_MY_LIST_HPP
