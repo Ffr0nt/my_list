@@ -15,15 +15,20 @@ template<typename T>
 class My_List{
 public:
 
+    class const_iterator;
+    class iterator;
+
     My_List() = default;
 
     template<typename T2> My_List(initializer_list<T2> init_list);
 
-    class const_iterator;
-
-    class iterator;
-
     void push_back(const T& el);
+
+    void push_front(const T& el);
+
+    void pop_back();
+
+    void pop_front();
 
     const_iterator cbegin(){
         return const_iterator(m_ptr_head, this);

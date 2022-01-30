@@ -14,19 +14,21 @@ void print_container(T& lst) {
 }
 
 int main() {
-    My_List<int> my_list = { 1, 2, 3, 4 };
+//    My_List<char> my_list = { 1, 1, 1, 1 };
+//    My_List<int> my_list = { 1.2 , 0.555 };
+
+    My_List<int> my_list = { 1 , 2 , 3 , 4 };
     cout << "size: " << my_list.size() << endl;
     print_container(my_list);
 
 
-    my_list.pop_back();
-    /*
     my_list.pop_front();
     my_list.push_front(0);
     my_list.push_back(5);
     cout << "size: " << my_list.size() << endl;
     print_container(my_list);
 
+    /*
     my_list.clear();
     cout << "size: " << my_list.size() << endl;
     print_container(my_list);

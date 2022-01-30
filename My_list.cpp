@@ -83,6 +83,53 @@ void My_List<T>::push_back(const T& el)
 
 
 template<typename T>
+void My_List<T>::push_front(const T& el){
+    if (m_size == 0)
+    {
+        Element * ptr_elem = new Element(el, nullptr, nullptr);
+        m_ptr_head = ptr_elem;
+        m_ptr_tail = ptr_elem;
+    }
+    else
+    {
+        Element * ptr_elem = new Element(el, nullptr, m_ptr_head);
+        m_ptr_head->m_ptr_prev = ptr_elem;
+        m_ptr_head = ptr_elem;
+    }
+    ++ m_size;
+}
+
+template<typename T>
+void My_List<T>::pop_front(){
+    if (m_size == 0)
+    {
+        throw runtime_error("U can't decries size of list by pop_front, it is already 0!");
+    }
+    else
+    {
+        m_ptr_head = m_ptr_head->m_ptr_next;
+        (*m_ptr_head->m_ptr_prev).~Element();
+        (*m_ptr_head).m_ptr_prev = nullptr;
+    }
+    -- m_size;
+}
+
+template<typename T>
+void My_List<T>::pop_back(){
+    if (m_size == 0)
+    {
+        throw runtime_error("U can't decries size of list by pop_back, it is already 0!");
+    }
+    else
+    {
+        m_ptr_tail = m_ptr_tail->m_ptr_prev;
+        (*m_ptr_tail->m_ptr_next).~Element();
+        (*m_ptr_tail).m_ptr_next = nullptr;
+    }
+    -- m_size;
+}
+
+template<typename T>
 template<typename T2>
 My_List<T>::My_List(initializer_list<T2> init_list){
     typedef typename initializer_list<T2>::const_iterator c_iter;
@@ -98,7 +145,9 @@ class My_List<T>::Element{
 public:
     Element(const T& data, Element* ptr_prev = nullptr, Element* ptr_next = nullptr)
             :m_data(data), m_ptr_prev(ptr_prev), m_ptr_next(ptr_next){}
+
     Element()=delete;
+
 public:
     T m_data;
     Element* m_ptr_prev;
