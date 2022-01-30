@@ -6,3 +6,25 @@
 
 #IncludeRegexTransform: 
 
+/Users/fedor/CLionProjects/my_list/My_list.cpp
+My_list.hpp
+/Users/fedor/CLionProjects/my_list/My_list.hpp
+
+/Users/fedor/CLionProjects/my_list/My_list.hpp
+iostream
+-
+list
+-
+My_list.hpp
+/Users/fedor/CLionProjects/my_list/My_list.hpp
+My_list.hpp
+/Users/fedor/CLionProjects/my_list/My_list.hpp
+
+/Users/fedor/CLionProjects/my_list/main.cpp
+iostream
+-
+list
+-
+My_list.hpp
+/Users/fedor/CLionProjects/my_list/My_list.hpp
+

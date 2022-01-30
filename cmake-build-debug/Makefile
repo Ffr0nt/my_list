@@ -129,6 +129,30 @@ my_list/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_list.dir/build.make CMakeFiles/my_list.dir/build
 .PHONY : my_list/fast
 
+My_list.o: My_list.cpp.o
+.PHONY : My_list.o
+
+# target to build an object file
+My_list.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_list.dir/build.make CMakeFiles/my_list.dir/My_list.cpp.o
+.PHONY : My_list.cpp.o
+
+My_list.i: My_list.cpp.i
+.PHONY : My_list.i
+
+# target to preprocess a source file
+My_list.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_list.dir/build.make CMakeFiles/my_list.dir/My_list.cpp.i
+.PHONY : My_list.cpp.i
+
+My_list.s: My_list.cpp.s
+.PHONY : My_list.s
+
+# target to generate assembly for a file
+My_list.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_list.dir/build.make CMakeFiles/my_list.dir/My_list.cpp.s
+.PHONY : My_list.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -162,6 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... my_list"
+	@echo "... My_list.o"
+	@echo "... My_list.i"
+	@echo "... My_list.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -7,5 +7,5 @@ include_directories(.)
 
 add_executable(my_list
         main.cpp
-        My_list.h
+        My_list.cpp
         My_list.hpp)

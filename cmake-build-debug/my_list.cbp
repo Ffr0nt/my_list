@@ -82,7 +82,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/fedor/CLionProjects/my_list/My_list.h">
+		<Unit filename="/Users/fedor/CLionProjects/my_list/My_list.cpp">
 			<Option target="my_list"/>
 		</Unit>
 		<Unit filename="/Users/fedor/CLionProjects/my_list/My_list.hpp">
