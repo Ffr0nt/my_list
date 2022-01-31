@@ -17,7 +17,7 @@ int main() {
 //    My_List<char> my_list = { 1, 1, 1, 1 };
 //    My_List<int> my_list = { 1.2 , 0.555 };
 
-    My_List<int> my_list = { 1 , 2 , 3 , 4 };
+    My_List<int> my_list = { 1 , 2, 3, 4};
     cout << "size: " << my_list.size() << endl;
     print_container(my_list);
 
@@ -28,11 +28,15 @@ int main() {
     cout << "size: " << my_list.size() << endl;
     print_container(my_list);
 
-    /*
+
     my_list.clear();
     cout << "size: " << my_list.size() << endl;
     print_container(my_list);
 
+    my_list.~My_List();
+    cout << "size: " << my_list.size() << endl;
+    print_container(my_list);
+    /*
     my_list.emplace_back(222);
     my_list.emplace_front(111);
     cout << "size: " << my_list.size() << endl;

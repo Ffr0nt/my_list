@@ -22,6 +22,10 @@ public:
 
     template<typename T2> My_List(initializer_list<T2> init_list);
 
+    template<typename T2> My_List(size_t size, T2 elem = 0 );
+
+    ~My_List();
+
     void push_back(const T& el);
 
     void push_front(const T& el);
@@ -29,6 +33,8 @@ public:
     void pop_back();
 
     void pop_front();
+
+     void clear();
 
     const_iterator cbegin(){
         return const_iterator(m_ptr_head, this);

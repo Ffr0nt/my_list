@@ -5,7 +5,7 @@
 #include "My_list.hpp"
 
 #pragma once
-
+//-----------------------------------------|classes|--------------------------------------------
 
 template<typename T>
 class My_List<T>::const_iterator{
@@ -64,6 +64,48 @@ public:
 };
 
 template<typename T>
+class My_List<T>::Element{
+public:
+    Element(const T& data, Element* ptr_prev = nullptr, Element* ptr_next = nullptr)
+            :m_data(data), m_ptr_prev(ptr_prev), m_ptr_next(ptr_next){}
+
+    Element()=delete;
+
+public:
+    T m_data;
+    Element* m_ptr_prev;
+    Element* m_ptr_next;
+};
+
+//----------------------------------|constructors + destructors|----------------------------------
+
+
+template<typename T>
+template<typename T2>
+My_List<T>::My_List(initializer_list<T2> init_list){
+    typedef typename initializer_list<T2>::const_iterator c_iter;
+
+
+    for (c_iter c_it = std::cbegin(init_list); c_it != std::cend(init_list); ++c_it) {
+        (*this).push_back (*c_it);
+    }
+}
+
+template<typename T>
+My_List<T>::~My_List(){ (*this).clear(); }
+
+template<typename T>
+template<typename T2>
+My_List<T>::My_List(size_t size, T2 elem ){
+    for (int i =0; m_size < size ; i ++){
+        (*this).pop_front( T(elem) );
+    }
+
+}
+
+//----------------------------------------|list methods|---------------------------------------------
+
+template<typename T>
 void My_List<T>::push_back(const T& el)
 {
     if (m_size == 0)
@@ -80,7 +122,6 @@ void My_List<T>::push_back(const T& el)
     }
     ++ m_size;
 }
-
 
 template<typename T>
 void My_List<T>::push_front(const T& el){
@@ -105,6 +146,12 @@ void My_List<T>::pop_front(){
     {
         throw runtime_error("U can't decries size of list by pop_front, it is already 0!");
     }
+    if (m_size == 1)
+    {
+        (*m_ptr_tail).~Element();
+        m_ptr_tail = nullptr;
+        m_ptr_head = nullptr;
+    }
     else
     {
         m_ptr_head = m_ptr_head->m_ptr_next;
@@ -120,6 +167,12 @@ void My_List<T>::pop_back(){
     {
         throw runtime_error("U can't decries size of list by pop_back, it is already 0!");
     }
+    if (m_size == 1)
+    {
+        (*m_ptr_tail).~Element();
+        m_ptr_tail = nullptr;
+        m_ptr_head = nullptr;
+    }
     else
     {
         m_ptr_tail = m_ptr_tail->m_ptr_prev;
@@ -130,26 +183,10 @@ void My_List<T>::pop_back(){
 }
 
 template<typename T>
-template<typename T2>
-My_List<T>::My_List(initializer_list<T2> init_list){
-    typedef typename initializer_list<T2>::const_iterator c_iter;
-
-
-    for (c_iter c_it = std::cbegin(init_list); c_it != std::cend(init_list); ++c_it) {
-        (*this).push_back (*c_it);
+void My_List<T>::clear(){
+    for (int i =0; m_size > 0 ; i ++){
+        (*this).pop_front();
     }
 }
 
-template<typename T>
-class My_List<T>::Element{
-public:
-    Element(const T& data, Element* ptr_prev = nullptr, Element* ptr_next = nullptr)
-            :m_data(data), m_ptr_prev(ptr_prev), m_ptr_next(ptr_next){}
 
-    Element()=delete;
-
-public:
-    T m_data;
-    Element* m_ptr_prev;
-    Element* m_ptr_next;
-};
