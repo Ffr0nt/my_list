@@ -97,8 +97,9 @@ My_List<T>::~My_List(){ (*this).clear(); }
 template<typename T>
 template<typename T2>
 My_List<T>::My_List(size_t size, T2 elem ){
+
     for (int i =0; m_size < size ; i ++){
-        (*this).pop_front( T(elem) );
+        (*this).push_front( T(elem) );
     }
 
 }
@@ -181,6 +182,12 @@ void My_List<T>::pop_back(){
     }
     -- m_size;
 }
+
+template<typename T>
+void My_List<T>::emplace_back(const T& el){
+
+}
+
 
 template<typename T>
 void My_List<T>::clear(){
