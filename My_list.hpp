@@ -24,6 +24,8 @@ public:
 
     template<typename T2 = int > My_List(size_t size, T2 elem = 0 );
 
+    template<typename T2 = int > My_List( My_List<T2> another_list);
+
     ~My_List();
 
     void push_back(const T& el);

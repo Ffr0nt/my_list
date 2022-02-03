@@ -12,6 +12,7 @@ class My_List<T>::const_iterator{
 public:
     const_iterator();
 
+//
     const_iterator(Element* const ptr_el, const My_List* const ptr_mylist): m_ptr_el(ptr_el), m_ptr_mylist(ptr_mylist){};
 
     const T& operator * () const noexcept {return  m_ptr_el->m_data;}
@@ -104,6 +105,19 @@ My_List<T>::My_List(size_t size, T2 elem ){
 
 }
 
+
+template<typename T>
+template<typename T2>
+My_List<T>::My_List(const My_List<T2> another_list){
+    typedef typename My_List<T2>::const_iterator c_iter;
+
+    for (c_iter c_it = another_list.cbegin(); c_it != another_list.cend(); ++c_it){
+        (*this).push_front( T(*c_it) );
+    }
+}
+
+
+
 //----------------------------------------|list methods|---------------------------------------------
 
 template<typename T>
@@ -182,11 +196,11 @@ void My_List<T>::pop_back(){
     }
     -- m_size;
 }
-
-template<typename T>
-void My_List<T>::emplace_back(const T& el){
-
-}
+//
+//template<typename T>
+//void My_List<T>::emplace_back(const T& el){
+//
+//}
 
 
 template<typename T>

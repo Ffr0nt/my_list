@@ -20,6 +20,12 @@ int main() {
     My_List<int> my_list = { 1 , 2, 3, 4};
 //    cout << "size: " << my_list.size() << endl;
 //    print_container(my_list);
+
+    My_List<char> my_list_1 = my_list;
+    cout << "size: " << my_list_1.size() << endl;
+    print_container(my_list_1);
+
+
 //
 //    my_list.pop_front();
 //    my_list.push_front(0);
@@ -36,10 +42,10 @@ int main() {
 
 
 
-    my_list.emplace_back(222);
-    my_list.emplace_front(111);
-    cout << "size: " << my_list.size() << endl;
-    print_container(my_list);
+//    my_list.emplace_back(222);
+//    my_list.emplace_front(111);
+//    cout << "size: " << my_list.size() << endl;
+//    print_container(my_list);
 
 //    for (list<int>::const_iterator it = my_list.begin(); it != my_list.end(); ++it)
 //        cout << *it << endl;
