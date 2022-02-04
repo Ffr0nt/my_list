@@ -28,6 +28,8 @@ public:
 
     ~My_List();
 
+    template<typename T2> My_List<T>& operator=(const My_List<T2> right);
+
     void push_back(const T& el);
 
     void push_front(const T& el);
@@ -35,6 +37,9 @@ public:
     void pop_back();
 
     void pop_front();
+
+    template <class... Args>
+    void  emplace_front (const Args&... args);
 
      void clear();
 

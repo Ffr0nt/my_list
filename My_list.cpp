@@ -47,6 +47,20 @@ public:
         return *this;
     }
 
+    const_iterator& advance(int amount){
+        if (amount > 0) {
+            for (int i = 0; i < amount; i++) {
+                ++(*this);
+            }
+        }
+        if (amount < 0) {
+            for (int i = 0; i < amount; i++) {
+                --(*this);
+            }
+        }
+        return this;
+    }
+
 public:
     Element* m_ptr_el = nullptr;
     const My_List * const m_ptr_mylist;
@@ -115,8 +129,6 @@ My_List<T>::My_List(const My_List<T2> another_list){
         (*this).push_front( T(*c_it) );
     }
 }
-
-
 
 //----------------------------------------|list methods|---------------------------------------------
 
@@ -196,11 +208,27 @@ void My_List<T>::pop_back(){
     }
     -- m_size;
 }
-//
-//template<typename T>
-//void My_List<T>::emplace_back(const T& el){
-//
-//}
+
+template<typename T>
+template<class... Args>
+void My_List<T>::emplace_front(const Args&... args) {
+    if (m_size == 0)
+    {
+        T  data =  T ( args... );
+        Element * ptr_elem = new Element(data ,nullptr,nullptr);
+        m_ptr_head = ptr_elem;
+        m_ptr_tail = ptr_elem;
+    }
+    else
+    {
+        T  data =  T (args...);
+        Element * ptr_elem = new  Element( data ,nullptr, m_ptr_head);
+
+        m_ptr_head->m_ptr_prev = ptr_elem;
+        m_ptr_head = ptr_elem;
+    }
+    ++ m_size;
+}
 
 
 template<typename T>
@@ -208,6 +236,37 @@ void My_List<T>::clear(){
     for (int i =0; m_size > 0 ; i ++){
         (*this).pop_front();
     }
+}
+
+template<typename T>
+template<typename T2>
+My_List<T>& My_List<T>::operator=(My_List<T2> right){
+
+    typedef typename My_List<T>::const_iterator c_iter_1;
+    typedef typename My_List<T2>::const_iterator c_iter_2;
+
+    if (m_size >  right.size()) {
+        for (int i = m_size; i < right.size(); --i) {(*this).pop_back();}
+    }
+
+    if (m_size <  right.size()) {
+        c_iter_2 c_it_2 = right.cbegin();
+        c_it_2.advance(m_size);
+
+        for (int i = m_size; i < right.size(); ++i) {
+            (*this).push_back(c_it_2());
+            c_it_2++;
+        }
+    }
+
+    c_iter_1 c_it_1 = (this)->cbegin();
+    c_iter_2 c_it_2 = right.cbegin();
+
+    for (; c_it_2 != right.cend();  ++c_it_1, ++c_it_2){
+        c_it_1() = c_it_2();
+    }
+
+    return this;
 }
 
 
