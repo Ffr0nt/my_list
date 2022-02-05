@@ -41,6 +41,9 @@ public:
         if(m_ptr_el){
             m_ptr_el = m_ptr_el->m_ptr_prev;
         }
+//        if(this == m_ptr_mylist->end()){
+//            m_ptr_el =  m_ptr_mylist->m_ptr_tail;
+//        }
         else{
             throw runtime_error("Cannot decrement end list iterator");
         }
@@ -49,16 +52,16 @@ public:
 
     const_iterator& advance(int amount){
         if (amount > 0) {
-            for (int i = 0; i < amount; i++) {
+            for (int i = 0; i < amount; ++i) {
                 ++(*this);
             }
         }
         if (amount < 0) {
-            for (int i = 0; i < amount; i++) {
+            for (int i = 0; i > amount; --i) {
                 --(*this);
             }
         }
-        return this;
+        return *this;
     }
 
 public:
@@ -210,6 +213,23 @@ void My_List<T>::pop_back(){
 }
 
 template<typename T>
+void My_List<T>::erase(My_List<T>::const_iterator position){
+    if (position == this->cbegin()){this->pop_front(); return;}
+
+    if (position == this->cend()){this->pop_back(); return;}
+
+    auto next = position.m_ptr_el->m_ptr_next;
+    auto prev = position.m_ptr_el->m_ptr_prev;
+
+    position.m_ptr_el->m_ptr_next->m_ptr_prev = prev;
+    position.m_ptr_el->m_ptr_prev->m_ptr_next = next;
+    (*m_ptr_tail).~Element();
+
+
+    -- m_size;
+}
+
+template<typename T>
 template<class... Args>
 void My_List<T>::emplace_front(const Args&... args) {
     if (m_size == 0)
@@ -230,6 +250,75 @@ void My_List<T>::emplace_front(const Args&... args) {
     ++ m_size;
 }
 
+template<typename T>
+template<class... Args>
+void My_List<T>::emplace(My_List::const_iterator position, const Args &... args) {
+
+if (position == this->begin()){
+    T  data =  T (args...);
+    this->push_front(data);
+}
+else {
+    if (position == this->cend()) {
+        T data = T(args...);
+        this->push_back(data);
+    }
+    else{
+    if ((position != this->cend()) & (position != this->begin())) {
+        T data = T(args...);
+        Element *ptr_elem = new Element(data, position.m_ptr_el->m_ptr_prev, position.m_ptr_el);
+        position.m_ptr_el->m_ptr_prev = ptr_elem;
+        position.m_ptr_el->m_ptr_prev->m_ptr_prev->m_ptr_next = ptr_elem;
+
+        ++m_size;
+    }
+
+    }
+}
+}
+
+template<typename T>
+template<class... Args>
+void My_List<T>::emplace_back(const Args &... args) {
+    if (m_size == 0)
+    {
+        T  data =  T ( args... );
+        Element * ptr_elem = new Element(data ,nullptr,nullptr);
+        m_ptr_head = ptr_elem;
+        m_ptr_tail = ptr_elem;
+    }
+    else
+    {
+        T  data =  T ( args... );
+        Element * ptr_elem = new Element(data, m_ptr_tail, nullptr);
+        m_ptr_tail->m_ptr_next = ptr_elem;
+        m_ptr_tail = ptr_elem;
+    }
+    ++ m_size;
+}
+
+template<typename T>
+void  My_List<T>::insert (My_List::const_iterator position, const T& data){
+
+    if (position == this->begin()){
+        this->push_front(data);
+    }
+    else {
+        if (position == this->cend()) {
+            this->push_back(data);
+        }
+        else{
+            if ((position != this->cend()) & (position != this->begin())) {
+                Element *ptr_elem = new Element(data, position.m_ptr_el->m_ptr_prev, position.m_ptr_el);
+                position.m_ptr_el->m_ptr_prev = ptr_elem;
+                position.m_ptr_el->m_ptr_prev->m_ptr_prev->m_ptr_next = ptr_elem;
+
+                ++m_size;
+            }
+
+        }
+    }
+}
 
 template<typename T>
 void My_List<T>::clear(){
@@ -268,5 +357,11 @@ My_List<T>& My_List<T>::operator=(My_List<T2> right){
 
     return this;
 }
+
+
+
+
+
+
 
 

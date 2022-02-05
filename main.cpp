@@ -13,15 +13,31 @@ void print_container(T& lst) {
     cout << "}" << endl;
 }
 
+template<typename T>
+void print_lst_test(T& lst) {
+    cout << "{ ";
+    int i = 0;
+    for (auto el : lst) {
+        if (i != 0)  cout << " , ";
+        el.print();
+        i ++;
+    }
+    cout << "}" << endl;
+}
+
 class Test_Class{
 public:
     Test_Class(int a, double b): m_a(a), m_b(b){};
+
+    void print (){
+        cout << m_a << '_' << m_b;
+    }
 private:
         int m_a;
         double m_b;
     };
 
-int NUM = 4;
+int NUM = 3;
 
 void test_1(){
     My_List<int> my_list_0 = { 1 , 2, 3, 4};
@@ -89,20 +105,55 @@ void test_3(){
     my_list.push_back(5);
     cout << "push_back(5); size: " << my_list.size() << endl;
     print_container(my_list);
+
+    my_list.erase(++my_list.cbegin());
+    cout << "erase(++my_list.cbegin()) " << my_list.size() << endl;
+    print_container(my_list);
 }
 
 void test_4(){
-    My_List<Test_Class> my_list = { Test_Class (4, 6.7)};
-//    My_List<int> my_list = { 1,2};
+    My_List<Test_Class> my_list = { Test_Class (2, 2.2)};
 
-    my_list.emplace_front(4, 6.7);
+    my_list.emplace_front(1, 1.1);
+    cout << "emplace_front(2, 2.2); size: " << my_list.size() << endl;
+    print_lst_test(my_list);
+
+    my_list.emplace_back(3, 3.3);
+    cout << "emplace_back(3, 3.3); " << my_list.size() << endl;
+    print_lst_test(my_list);
+
+    my_list.emplace( my_list.cbegin(),4,4.4 );
+    cout << "emplace( my_list.cbegin(),4,4.4 ); " << my_list.size() << endl;
+    print_lst_test(my_list);
+
+    my_list.emplace( my_list.cend(),5,5.5 );
+    cout << "emplace( my_list.cend(),5,5.5 ); " << my_list.size() << endl;
+    print_lst_test(my_list);
+
+    my_list.emplace(++ my_list.cbegin(),6,6.6 );
+    cout << "emplace(++ my_list.cbegin(),6,6.6 ); " << my_list.size() << endl;
+    print_lst_test(my_list);
+
+    my_list.insert( my_list.cend(), Test_Class(7,7.7 ) );
+    cout << endl<< "insert( my_list.cend(),66 ); " << my_list.size() << endl;
+    print_lst_test(my_list);
+
+}
+
+void test_5(){
+    My_List<int> my_list = { 1 , 2, 3, 4, 5 };
+    for (My_List<int>::const_iterator it = my_list.begin(); it != my_list.end(); ++it) cout << *it << ' ';
+
+    auto it = my_list.cbegin().advance(4);
+    cout << endl << *it;
+
+    auto it_2 =  (my_list.cbegin().advance(4)).advance(- 3);
+    cout << endl << *it_2;
+
+
 }
 
 int main() {
-//    my_list.emplace_back(222);
-//    my_list.emplace_front(111);
-//    cout << "size: " << my_list.size() << endl;
-//    print_container(my_list);
 
 //    for (list<int>::const_iterator it = my_list.begin(); it != my_list.end(); ++it)
 //        cout << *it << endl;
@@ -118,6 +169,9 @@ int main() {
             break;
         case 4:
             test_4();
+            break;
+        case 5:
+            test_5();
             break;
         default:
             throw runtime_error("What the .....???");

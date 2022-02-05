@@ -39,17 +39,25 @@ public:
     void pop_front();
 
     template <class... Args>
+    void emplace ( const_iterator position , const Args&... args);
+
+    template <class... Args>
+    void  emplace_back (const Args&... args);
+
+    template <class... Args>
     void  emplace_front (const Args&... args);
 
-     void clear();
+    void insert (const_iterator position ,const T& data);
 
-    void emplace_back();
+    void erase (const_iterator position);
 
-    const_iterator cbegin(){
+    void clear();
+
+    const_iterator cbegin() {
         return const_iterator(m_ptr_head, this);
     }
 
-    const_iterator cend(){
+    const_iterator cend() {
         return const_iterator(nullptr, this);
     }
 
