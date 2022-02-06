@@ -37,6 +37,16 @@ public:
         return *this;
     }
 
+    const_iterator operator ++ (int){
+        if (m_ptr_el)
+        {
+            const_iterator temp(*this);
+            m_ptr_el = m_ptr_el->m_ptr_next;
+            return temp;
+        }
+        else throw runtime_error("Cannot increment end list iterator");
+    }
+
     const_iterator& operator -- () {
         if(m_ptr_el){
             m_ptr_el = m_ptr_el->m_ptr_prev;
@@ -48,6 +58,16 @@ public:
             throw runtime_error("Cannot decrement end list iterator");
         }
         return *this;
+    }
+
+    const_iterator operator -- (int){
+        if (m_ptr_el)
+        {
+            const_iterator temp(*this);
+            m_ptr_el = m_ptr_el->m_ptr_prev;
+            return temp;
+        }
+        else throw runtime_error("Cannot increment end list iterator");
     }
 
     const_iterator& advance(int amount){

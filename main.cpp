@@ -2,6 +2,12 @@
 #include <list>
 #include "My_list.cpp"
 
+// from additional things:
+//
+// all constructor can get another types (which get size, init_list, list)
+// constructor that get size of list optionally can get number to put in the list
+// iterator.advance()
+// economical memory allocation in =
 
 using namespace std;
 
