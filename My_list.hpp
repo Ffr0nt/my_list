@@ -24,7 +24,7 @@ public:
 
     template<typename T2 = int > My_List(const size_t& size,const T2& elem = 0 );
 
-    template<typename T2 = int > My_List( My_List<T2> another_list);
+    template<typename T2 = int > My_List( My_List<T2>& another_list);
 
     ~My_List();
 
@@ -39,7 +39,7 @@ public:
     void pop_front();
 
     template <class... Args>
-    void emplace ( const_iterator position , const Args&... args);
+    void emplace ( const_iterator& position , const Args&... args);
 
     template <class... Args>
     void  emplace_back (const Args&... args);
@@ -47,9 +47,9 @@ public:
     template <class... Args>
     void  emplace_front (const Args&... args);
 
-    void insert (const_iterator position ,const T& data);
+    void insert (const_iterator& position ,const T& data);
 
-    void erase (My_List<T>::const_iterator position);
+    void erase (const_iterator& position);
 
     void clear();
 

@@ -37,7 +37,7 @@ private:
         double m_b;
     };
 
-int NUM = 5;
+int NUM = 4;
 
 void test_1(){
     My_List<int> my_list_0 = { 1 , 2, 3, 4};
@@ -122,11 +122,13 @@ void test_4(){
     cout << "emplace_back(3, 3.3); " << my_list.size() << endl;
     print_lst_test(my_list);
 
-    my_list.emplace( my_list.cbegin(),4,4.4 );
+    auto it_1 = my_list.cbegin();
+    my_list.emplace( it_1,4,4.4 );
     cout << "emplace( my_list.cbegin(),4,4.4 ); " << my_list.size() << endl;
     print_lst_test(my_list);
 
-    my_list.emplace( my_list.cend(),5,5.5 );
+    auto it_2 = my_list.cend();
+    my_list.emplace(it_2,5,5.5 );
     cout << "emplace( my_list.cend(),5,5.5 ); " << my_list.size() << endl;
     print_lst_test(my_list);
 
@@ -134,8 +136,9 @@ void test_4(){
     cout << "emplace(++ my_list.cbegin(),6,6.6 ); " << my_list.size() << endl;
     print_lst_test(my_list);
 
-    my_list.insert( my_list.cend(), Test_Class(7,7.7 ) );
-    cout << endl<< "insert( my_list.cend(),66 ); " << my_list.size() << endl;
+
+    my_list.insert( it_2, Test_Class(7,7.7 ) );
+    cout << endl<< "insert( my_list.cend(), 7,7.7 ); " << my_list.size() << endl;
     print_lst_test(my_list);
 
 }

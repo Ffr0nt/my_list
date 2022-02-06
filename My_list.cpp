@@ -125,7 +125,7 @@ My_List<T>::My_List(const size_t& size,const T2& elem ){
 
 template<typename T>
 template<typename T2>
-My_List<T>::My_List(const My_List<T2> another_list){
+My_List<T>::My_List(My_List<T2> &another_list){
     typedef typename My_List<T2>::const_iterator c_iter;
 
     for (c_iter c_it = another_list.cbegin(); c_it != another_list.cend(); ++c_it){
@@ -213,7 +213,7 @@ void My_List<T>::pop_back(){
 }
 
 template<typename T>
-void My_List<T>::erase(My_List<T>::const_iterator position){
+void My_List<T>::erase(My_List<T>::const_iterator& position){
     if (position == this->cbegin()){this->pop_front(); return;}
 
     if (position == this->cend()){this->pop_back(); return;}
@@ -252,7 +252,7 @@ void My_List<T>::emplace_front(const Args&... args) {
 
 template<typename T>
 template<class... Args>
-void My_List<T>::emplace(My_List::const_iterator position, const Args &... args) {
+void My_List<T>::emplace(My_List::const_iterator& position, const Args &... args) {
 
 if (position == this->begin()){
     T  data =  T (args...);
@@ -298,7 +298,7 @@ void My_List<T>::emplace_back(const Args &... args) {
 }
 
 template<typename T>
-void  My_List<T>::insert (My_List::const_iterator position, const T& data){
+void  My_List<T>::insert (My_List::const_iterator& position, const T& data){
 
     if (position == this->begin()){
         this->push_front(data);
@@ -358,22 +358,6 @@ My_List<T>& My_List<T>::operator=( const My_List<T2>& right){
     return this;
 }
 
-template<typename T>
-void My_List<T>::erase(My_List<T>::const_iterator position) {
-    if (position == this->cbegin()){this->pop_front(); return;}
-
-    if (position == this->cend()){this->pop_back(); return;}
-
-    auto next = position.m_ptr_el->m_ptr_next;
-    auto prev = position.m_ptr_el->m_ptr_prev;
-
-    position.m_ptr_el->m_ptr_next->m_ptr_prev = prev;
-    position.m_ptr_el->m_ptr_prev->m_ptr_next = next;
-    (*m_ptr_tail).~Element();
-
-
-    -- m_size;
-}
 
 
 
