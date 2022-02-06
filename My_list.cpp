@@ -100,7 +100,7 @@ public:
 
 template<typename T>
 template<typename T2>
-My_List<T>::My_List(initializer_list<T2> init_list){
+My_List<T>::My_List(const initializer_list<T2>& init_list){
     typedef typename initializer_list<T2>::const_iterator c_iter;
 
 
@@ -114,7 +114,7 @@ My_List<T>::~My_List(){ (*this).clear(); }
 
 template<typename T>
 template<typename T2>
-My_List<T>::My_List(size_t size, T2 elem ){
+My_List<T>::My_List(const size_t& size,const T2& elem ){
 
     for (int i =0; m_size < size ; i ++){
         (*this).push_front( T(elem) );
@@ -329,7 +329,7 @@ void My_List<T>::clear(){
 
 template<typename T>
 template<typename T2>
-My_List<T>& My_List<T>::operator=(My_List<T2> right){
+My_List<T>& My_List<T>::operator=( const My_List<T2>& right){
 
     typedef typename My_List<T>::const_iterator c_iter_1;
     typedef typename My_List<T2>::const_iterator c_iter_2;
@@ -356,6 +356,23 @@ My_List<T>& My_List<T>::operator=(My_List<T2> right){
     }
 
     return this;
+}
+
+template<typename T>
+void My_List<T>::erase(My_List<T>::const_iterator position) {
+    if (position == this->cbegin()){this->pop_front(); return;}
+
+    if (position == this->cend()){this->pop_back(); return;}
+
+    auto next = position.m_ptr_el->m_ptr_next;
+    auto prev = position.m_ptr_el->m_ptr_prev;
+
+    position.m_ptr_el->m_ptr_next->m_ptr_prev = prev;
+    position.m_ptr_el->m_ptr_prev->m_ptr_next = next;
+    (*m_ptr_tail).~Element();
+
+
+    -- m_size;
 }
 
 

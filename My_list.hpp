@@ -20,15 +20,15 @@ public:
 
     My_List() = default;
 
-    template<typename T2> My_List(initializer_list<T2> init_list);
+    template<typename T2> My_List(const initializer_list<T2>& init_list);
 
-    template<typename T2 = int > My_List(size_t size, T2 elem = 0 );
+    template<typename T2 = int > My_List(const size_t& size,const T2& elem = 0 );
 
     template<typename T2 = int > My_List( My_List<T2> another_list);
 
     ~My_List();
 
-    template<typename T2> My_List<T>& operator=(const My_List<T2> right);
+    template<typename T2> My_List<T>& operator=(const My_List<T2>& right);
 
     void push_back(const T& el);
 
@@ -49,7 +49,7 @@ public:
 
     void insert (const_iterator position ,const T& data);
 
-    void erase (const_iterator position);
+    void erase (My_List<T>::const_iterator position);
 
     void clear();
 
@@ -70,8 +70,6 @@ public:
     }
 
     size_t size() const noexcept  {return m_size;};
-
-
 
 private:
     class Element;

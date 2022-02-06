@@ -37,7 +37,7 @@ private:
         double m_b;
     };
 
-int NUM = 3;
+int NUM = 5;
 
 void test_1(){
     My_List<int> my_list_0 = { 1 , 2, 3, 4};
@@ -155,8 +155,6 @@ void test_5(){
 
 int main() {
 
-//    for (list<int>::const_iterator it = my_list.begin(); it != my_list.end(); ++it)
-//        cout << *it << endl;
     switch (NUM) {
         case 1:
             test_1();
@@ -177,17 +175,6 @@ int main() {
             throw runtime_error("What the .....???");
     }
     //    system("pause");
-
-    //------------------------------------------------------------
-    // Далее тесты для повышенного уровня сложности (оценки 9-10):
-//    list<int>::const_iterator it = my_list.end();
-//    --it; // Умеет с после последнего перемещаться на последний
-//    cout << *it << endl;
-//    ++it; // Умеет приходить из последнего на после последнего
-//    cout << *it << endl; // выведет пустышку в режиме Release или ошибка в режиме Debug
-//    ++it; // после последнего перейдёт к head (т.е. список зациклен)
-//    cout << *it << endl;
-
     return 0;
 }
 
